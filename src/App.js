@@ -21,7 +21,9 @@ class Lifecycle extends Component {
         return res.json();
       })
       .then(data => {
-        console.log(data);
+        // Check whether data is an array or not
+        console.log(Array.isArray(data));
+        console.log("Fetched Data: ", data);
         this.setState({
           items: data,
           isLoaded:true,
@@ -29,10 +31,20 @@ class Lifecycle extends Component {
       })
   }
 
-
+  // 1. Deconstruct the state keys
+  // 2. Create a parent div className="App" 
+  // 3. Create a child div className="Names" with lists
+  // 4. Render Data (array) as a list {items.map(item => (<li key={item}>{item}</li>))}
   render() {
+    let {isLoaded, items} = this.state;
     return (
-      <div></div>
+      <div className="App">
+        <div className="Names">
+          <ul>
+          {items.map(item => <li>{item}</li>)}
+          </ul>
+        </div>
+      </div>
     );
   };
 };
